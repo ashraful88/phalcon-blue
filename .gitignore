@@ -1,0 +1,14 @@
+cache/volt/*.php
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+.project
+.settings
+.buildpath
+*.komodoproject
+*.sublime-project
+*.sublime-workspace
+.idea/
+var/logs/exceptions.log
+vendor/

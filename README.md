@@ -1,3 +1,3 @@
-# phalcon-blue
+# Phalcon-Blue
 Phalcon Modular MVC
 Blogging script

@@ -3,7 +3,7 @@
  * Phalcon-Blue
  * Blogging script using Phalcon php Framework
  * https://github.com/ashraful88/phalcon-blue
- * 
+ *
  */
 
 error_reporting(E_ALL);
@@ -20,10 +20,12 @@ try {
   define('BASE_DIR', dirname(__DIR__));
   define('APP_DIR', BASE_DIR . '/app');
 
-  $config = include APP_DIR . '/etc/Config.php';
+  $config = include APP_DIR . '/etc/config.php';
+  require APP_DIR . '/etc/loader.php';
+  require APP_DIR . '/etc/service.php';
 
   /**
-   * Composer autoload 
+   * Composer autoload
    */
   require BASE_DIR . "/vendor/autoload.php";
 
@@ -35,12 +37,12 @@ try {
   /**
    * Include modules
    */
-  require APP_DIR . '/etc/Modules.php';
+  require APP_DIR . '/etc/modules.php';
 
   /**
    * Include routes
    */
-  require APP_DIR . '/etc/Routes.php';
+  require APP_DIR . '/etc/routes.php';
 
   // Handle the request
   echo $application->handle()->getContent();
@@ -49,4 +51,3 @@ try {
   echo $e->getMessage();
   echo $e->getTraceAsString();
 }
-

@@ -1,4 +1,5 @@
 <?php
 /**
-Phalcon loader
+* Phalcon loader
 */
+$loader = new Phalcon\Loader();

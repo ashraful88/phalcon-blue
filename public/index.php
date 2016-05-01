@@ -47,7 +47,7 @@ try {
   // Handle the request
   echo $application->handle()->getContent();
 
-} catch (\Phalcon\Exception $e) {
+} catch (\Exception $e) {
   echo $e->getMessage();
   echo $e->getTraceAsString();
 }

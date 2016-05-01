@@ -1,6 +1,6 @@
 <?php
 /** Module loader
-installed modules */
+ * installed modules */
 
 $application->registerModules(
   array(

@@ -1,10 +1,10 @@
 <?php
+
 /**
-* User Model
-*/
+ * User Model
+ */
+class User extends Model
+{
 
-class User extends Model{
 
-
-  
 }

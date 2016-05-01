@@ -48,7 +48,7 @@ class Module implements ModuleDefinitionInterface
     });
 
     // Registering the view
-    $dInjection->set('view', function () {
+    $di->set('view', function () {
       $view = new View();
       $view->setViewsDir(__DIR__ . '/Views/');
       return $view;

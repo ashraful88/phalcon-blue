@@ -1,7 +1,7 @@
 <?php
 namespace Blue\Modules\Blog;
 
-use Blue\Plugins\Auth\UserAuthorization;
+use Blue\Plugins\Auth\UserAuthorization as Uauth;
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\DiInterface;
@@ -24,8 +24,8 @@ class Module implements ModuleDefinitionInterface
     $loader = new Loader();
     $loader->registerNamespaces(
       array(
-        'Blue\Blog\Controllers' => '../app/core/modules/Blog/Controllers/',
-        'Blue\Blog\Models'      => '../app/core/modules/Blog/Models/',
+        'Blue\Modules\Blog\Controllers' => '../app/core/modules/Blog/Controllers/',
+        'Blue\Modules\Blog\Models'      => '../app/core/modules/Blog/Models/',
       )
     );
     $loader->register();
@@ -40,9 +40,9 @@ class Module implements ModuleDefinitionInterface
     // Registering a dispatcher
     $di->set('dispatcher', function () {
       $eventsManager = new EventsManager();
-      $eventsManager->attach('dispatch:beforeDispatch', new UserAuthorization());
+      $eventsManager->attach('dispatch:beforeDispatch', new Uauth());
       $dispatcher = new Dispatcher();
-      $dispatcher->setDefaultNamespace('Blue\Blog\Controllers');
+      $dispatcher->setDefaultNamespace('Blue\Modules\Blog\Controllers');
       $dispatcher->setEventsManager($eventsManager);
       return $dispatcher;
     });

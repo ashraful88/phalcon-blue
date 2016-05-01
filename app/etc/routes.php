@@ -1,65 +1,78 @@
 <?php /** Router */
 use Phalcon\Mvc\Router;
-
-$router = new Router();
-
-
-$router->add(
-  "/admin-backend",
-  array(
-    "controller" => "users",
-    "action"     => "login"
-  )
-);
-$router->add(
-  "/login",
-  array(
-    "controller" => "users",
-    "action"     => "login"
-  )
-);
-$router->add(
-  "/logout",
-  array(
-    "controller" => "users",
-    "action"     => "logout"
-  )
-);
-$router->add(
-  "/users/change-password",
-  array(
-    "controller" => "users",
-    "action"     => "changePassword"
-  )
-);
+use Phalcon\Mvc\Router\Group as RouterGroup;
 
 
-// Create a group with a common module and controller
-$blog = new RouterGroup(
-  array(
+$di->set('router', function () {
+  $router = new Router();
+  $router->setDefaultModule("blog");
+
+  $router->add("/", array(
     'module'     => 'blog',
-    'controller' => 'index'
-  )
-);
-
-// All the routes start with /blog
-$blog->setPrefix('/blog');
-$blog->add('/save', array(
-    'action' => 'save'
-  )
-);
-$blog->add('/edit/{id}', array(
-    'action' => 'edit',
-    'd'      => 1
-  )
-);
-$blog->add('/blog', array(
     'controller' => 'blog',
     'action'     => 'index'
-  )
-);
+  ));
+
+// Create a group with a common module and controller
+  $users = new RouterGroup(
+    array(
+      'module'     => 'users',
+      'controller' => 'user'
+    )
+  );
+  $users->setPrefix('/accounts');
+  $users->add(
+    "/login",
+    array(
+      "controller" => "user",
+      "action"     => "login"
+    )
+  );
+  $users->add(
+    "/logout",
+    array(
+      "controller" => "user",
+      "action"     => "logout"
+    )
+  );
+  $users->add(
+    "/users/change-password",
+    array(
+      "controller" => "user",
+      "action"     => "changePassword"
+    )
+  );
 // Add the group to the router
-$router->mount($blog);
+  $router->mount($users);
 
+// Create a group with a common module and controller
+  $blog = new RouterGroup(
+    array(
+      'module'     => 'blog',
+      'controller' => 'index'
+    )
+  );
 
-$router->handle();
+// All the routes start with /blog
+  $blog->setPrefix('/blog');
+  $blog->add('/save', array(
+      'action' => 'save'
+    )
+  );
+  $blog->add('/edit/{id}', array(
+      'action' => 'edit',
+      'd'      => 1
+    )
+  );
+  $blog->add('/blog', array(
+      'controller' => 'blog',
+      'action'     => 'index'
+    )
+  );
+// Add the group to the router
+  $router->mount($blog);
+
+  return $router;
+  //$router->handle();
+
+});

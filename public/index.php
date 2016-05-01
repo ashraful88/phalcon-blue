@@ -19,10 +19,10 @@ try {
 
   define('BASE_DIR', dirname(__DIR__));
   define('APP_DIR', BASE_DIR . '/app');
-
+  
   $config = include APP_DIR . '/etc/config.php';
   require APP_DIR . '/etc/loader.php';
-  require APP_DIR . '/etc/service.php';
+  require APP_DIR . '/etc/services.php';
 
   /**
    * Composer autoload

@@ -24,8 +24,8 @@ class Module implements ModuleDefinitionInterface
     $loader = new Loader();
     $loader->registerNamespaces(
       array(
-        'Blue\Users\Controllers' => '../app/core/modules/Users/Controllers/',
-        'Blue\Users\Models'      => '../app/core/modules/Users/Models/',
+        'Blue\Modules\Users\Controllers' => '../app/core/modules/Users/Controllers/',
+        'Blue\Modules\Users\Models'      => '../app/core/modules/Users/Models/',
       )
     );
     $loader->register();
@@ -42,7 +42,7 @@ class Module implements ModuleDefinitionInterface
       $eventsManager = new EventsManager();
       $eventsManager->attach('dispatch:beforeDispatch', new UserAuthorization());
       $dispatcher = new Dispatcher();
-      $dispatcher->setDefaultNamespace('Blue\Users\Controllers');
+      $dispatcher->setDefaultNamespace('Blue\Modules\Users\Controllers');
       $dispatcher->setEventsManager($eventsManager);
       return $dispatcher;
     });

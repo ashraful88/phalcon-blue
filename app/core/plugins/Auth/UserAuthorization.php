@@ -1,5 +1,5 @@
 <?php
-namespace Blue\Plugins\Auth\UserAuthorization;
+namespace Blue\Plugins\Auth;
 
 
 use Phalcon\Events\Event;

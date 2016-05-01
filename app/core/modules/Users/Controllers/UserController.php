@@ -1,5 +1,5 @@
 <?php
-namespace Blue\Modules\Users\Controller;
+namespace Blue\Modules\Users\Controllers;
 
 use Phalcon\Mvc\Controller;
 use Phalcon\Http\Response;

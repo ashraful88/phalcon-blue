@@ -1,5 +1,5 @@
 <?php
-namespace Blue\Modules\Users\Models;
+namespace Blue\Modules\Blog\Models;
 
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Model;
@@ -8,7 +8,7 @@ use Phalcon\Config;
 /**
  * User Model
  */
-class User extends Model
+class Posts extends Model
 {
 
 

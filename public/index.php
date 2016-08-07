@@ -27,7 +27,7 @@ try {
   /**
    * Composer autoload
    */
-  //require BASE_DIR . "/vendor/autoload.php";
+  require BASE_DIR . "/vendor/autoload.php";
 
   /**
    * Handle the request

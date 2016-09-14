@@ -25,12 +25,40 @@ class Users extends Model
   }
 
   /**
-   * @return AdapterInterface
+   * @return mixed
    */
   protected function getLogger()
   {
     return $this->di->get("logger");
   }
+
+  /**
+   * @param User $user
+   * @return mixed|null
+   */
+  public function createUser(User $user)
+  {
+    $userData = [
+      $user->getName(),
+      $user->getEmail(),
+      $user->getPassword(),
+      $user->getStatus(),
+      $user->getParams()
+    ];
+    /** @var Db\AdapterInterface $database */
+    $database = $this->di->get("db");
+    try {
+      $set = $database->query("SELECT user_create(?,?,?,?,?);", $userData);
+      $set->setFetchMode(Db::FETCH_ASSOC);
+      $result = $set->fetch();
+      return $result;
+    } catch (\PDOException $e) {
+      $this->error = $e->getMessage();
+      $this->getLogger()->error(sprintf("Create User Failed: %s, error: %s", $user->getEmail(), $this->error));
+    }
+    return null;
+  }
+
   /**
    * @param $email
    * @param $password
@@ -56,7 +84,8 @@ class Users extends Model
    * @param $userId
    * @return mixed|null
    */
-  public function getUserById($userId){
+  public function getUserById($userId)
+  {
     /** @var Db\AdapterInterface $database */
     $database = $this->di->get("db");
     try {
@@ -75,7 +104,8 @@ class Users extends Model
    * @param $email
    * @return mixed|null
    */
-  public function getUserByEmail($email){
+  public function getUserByEmail($email)
+  {
     /** @var Db\AdapterInterface $database */
     $database = $this->di->get("db");
     try {
@@ -94,19 +124,47 @@ class Users extends Model
    * @param User $user
    * @return bool
    */
-  public function updateUser(User $user){
+  public function updateUser(User $user)
+  {
+    $userData = [
+      $user->getId(),
+      $user->getEmail(),
+      $user->getPassword(),
+      $user->getParams(),
+      $user->getStatus()
+    ];
     /** @var Db\AdapterInterface $database */
     $database = $this->di->get("db");
     try {
-      //TODO: add parameters
-      $set = $database->query("SELECT user_update(?);", [$user]);
+      $set = $database->query("SELECT user_update(?,?,?,?,?);", $userData);
       $set->setFetchMode(Db::FETCH_ASSOC);
       $result = $set->fetch();
       return $result;
     } catch (\PDOException $e) {
       $this->error = $e->getMessage();
-      $this->getLogger()->error(sprintf("User update failed: error: %s", $this->error));
+      $this->getLogger()->error(sprintf("User update failed: userId %s error: %s", $user->getId(), $this->error));
     }
     return null;
   }
+
+  /**
+   * @param $userId
+   * @return mixed|null
+   */
+  public function deleteUser($userId)
+  {
+    /** @var Db\AdapterInterface $database */
+    $database = $this->di->get("db");
+    try {
+      $set = $database->query("SELECT user_delete(?);", [$userId]);
+      $set->setFetchMode(Db::FETCH_ASSOC);
+      $result = $set->fetch();
+      return $result;
+    } catch (\PDOException $e) {
+      $this->error = $e->getMessage();
+      $this->getLogger()->error(sprintf("Get delete user Failed: userId %s, error: %s", $userId, $this->error));
+    }
+    return null;
+  }
+
 }

@@ -1,5 +1,5 @@
-CREATE OR REPLACE FUNCTION user_login(i_email  user_accounts.email%TYPE,
-                                     i_password user_accounts.password%TYPE)
+CREATE OR REPLACE FUNCTION user_login(i_email    user_accounts.email%TYPE,
+                                      i_password user_accounts.password%TYPE)
   RETURNS SETOF user_accounts AS $$
 BEGIN
 

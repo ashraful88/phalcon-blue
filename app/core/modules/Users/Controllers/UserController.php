@@ -46,7 +46,13 @@ class UserController extends Controller
    */
   public function accountCreateAction()
   {
-
+    if ($this->request->isPost()) {
+      // Access POST data
+      $customerName = $this->request->getPost("name");
+      $customerBorn = $this->request->getPost("email");
+    }else{
+      //TODO: render view here, create form
+    }
   }
 
   /**

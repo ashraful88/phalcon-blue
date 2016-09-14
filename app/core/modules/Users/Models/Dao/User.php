@@ -1,6 +1,8 @@
 <?php
 namespace Blue\Modules\Users\Models\Dao;
 
+use Rhumsaa\Uuid\Console\Exception;
+
 class User
 {
   protected $id = null;
@@ -21,17 +23,26 @@ class User
   }
 
   /**
-   *
+   * @param $data
    */
-  protected function init()
+  public function init($data)
   {
-
+    if(!is_array($data)){
+      throw new Exception('No data available to init');
+    }
+    $this->setId($data['user_id']);
+    $this->setEmail($data['email']);
+    $this->setName($data['name']);
+    $this->setPassword($data['password']);
+    $this->setStatus($data['status']);
+    $this->setParam($data['param']);
+    $this->setCreateTime($data['create_time']);
   }
 
   /**
    * @param $id
    */
-  protected function setId($id)
+  public function setId($id)
   {
     $this->id = $id;
   }
@@ -39,7 +50,7 @@ class User
   /**
    * @return null
    */
-  protected function getId()
+  public function getId()
   {
     return $this->id;
   }
@@ -47,7 +58,7 @@ class User
   /**
    * @param $name
    */
-  protected function setName($name)
+  public function setName($name)
   {
     $this->name = $name;
   }
@@ -55,7 +66,7 @@ class User
   /**
    * @return null
    */
-  protected function getName()
+  public function getName()
   {
     return $this->name;
   }
@@ -63,7 +74,7 @@ class User
   /**
    * @param $email
    */
-  protected function setEmail($email)
+  public function setEmail($email)
   {
     $this->email = $email;
   }
@@ -71,7 +82,7 @@ class User
   /**
    * @return null
    */
-  protected function getEmail()
+  public function getEmail()
   {
     return $this->email;
   }
@@ -79,7 +90,7 @@ class User
   /**
    * @param $password
    */
-  protected function setPassword($password)
+  public function setPassword($password)
   {
     $this->password = $password;
   }
@@ -87,7 +98,7 @@ class User
   /**
    * @return null
    */
-  protected function getPassword()
+  public function getPassword()
   {
     return $this->password;
   }
@@ -95,7 +106,7 @@ class User
   /**
    * @param $status
    */
-  protected function setStatus($status)
+  public function setStatus($status)
   {
     $this->status = $status;
   }
@@ -103,7 +114,7 @@ class User
   /**
    * @return null
    */
-  protected function getStatus()
+  public function getStatus()
   {
     return $this->status;
   }
@@ -111,7 +122,7 @@ class User
   /**
    * @param $params
    */
-  protected function setParam($params)
+  public function setParam($params)
   {
     $this->params = $params;
   }
@@ -119,7 +130,7 @@ class User
   /**
    * @return null
    */
-  protected function getParams()
+  public function getParams()
   {
     return $this->params;
   }
@@ -127,7 +138,7 @@ class User
   /**
    * @param $create_time
    */
-  protected function setCreateTime($create_time)
+  public function setCreateTime($create_time)
   {
     $this->create_time = $create_time;
   }
@@ -135,7 +146,7 @@ class User
   /**
    * @return null
    */
-  protected function getCreateTime()
+  public function getCreateTime()
   {
     return $this->create_time;
   }

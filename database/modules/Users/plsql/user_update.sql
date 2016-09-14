@@ -17,7 +17,7 @@ BEGIN
   SET
     name   = i_name,
     email  = i_email,
-    param  = i_params,
+    params  = i_params,
     status = i_status
   WHERE
     user_id = i_user_id;

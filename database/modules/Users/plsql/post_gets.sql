@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION user_gets(i_status user_accounts.status%TYPE,
-                                                i_offset      INT)
+                                     i_offset INT)
   RETURNS SETOF user_accounts AS $$
 BEGIN
 

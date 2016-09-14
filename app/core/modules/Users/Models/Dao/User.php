@@ -1,4 +1,5 @@
 <?php
+namespace Blue\Modules\Users\Models\Dao;
 
 class User
 {

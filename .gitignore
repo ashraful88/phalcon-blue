@@ -6,6 +6,7 @@ Thumbs.db
 .project
 .settings
 .buildpath
+composer.lock
 *.komodoproject
 *.sublime-project
 *.sublime-workspace

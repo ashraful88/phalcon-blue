@@ -5,6 +5,7 @@ use Phalcon\Mvc\Controller;
 use Phalcon\Http\Response;
 use Blue\Plugins\Auth\UserAuthorization;
 use Blue\Modules\Users\Models\User as UserModel;
+use Blue\Modules\Users\Controllers\Handler\UserCreateHandler;
 
 /**
  * Users Controller
@@ -46,13 +47,8 @@ class UserController extends Controller
    */
   public function accountCreateAction()
   {
-    if ($this->request->isPost()) {
-      // Access POST data
-      $customerName = $this->request->getPost("name");
-      $customerBorn = $this->request->getPost("email");
-    }else{
-      //TODO: render view here, create form
-    }
+    $createHandler = new UserCreateHandler($this);
+    return $createHandler->handle();
   }
 
   /**

@@ -6,7 +6,7 @@ abstract class UserHandlerAbstract implements UserHandlerInterface{
 
   protected $controller;
 
-  public function __construct(UserController $controller)
+  public function __construct($controller)
   {
     $this->controller = $controller;
 

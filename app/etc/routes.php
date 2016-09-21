@@ -22,6 +22,13 @@ $di->set('router', function () {
   );
   $users->setPrefix('/accounts');
   $users->add(
+    "/create",
+    array(
+      "controller" => "user",
+      "action"     => "accountCreate"
+    )
+  );
+  $users->add(
     "/login",
     array(
       "controller" => "user",

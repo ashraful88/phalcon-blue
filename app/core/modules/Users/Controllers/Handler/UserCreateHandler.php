@@ -3,6 +3,7 @@ namespace Blue\Modules\Users\Controllers\Handler;
 
 use Blue\Modules\Users\Controllers\UserController;
 use Blue\Modules\Users\Models\Dao\User;
+use Blue\Modules\Users\Models\Users;
 
 class UserCreateHandler extends UserHandlerAbstract
 {
@@ -14,7 +15,7 @@ class UserCreateHandler extends UserHandlerAbstract
 
   public function handle()
   {
-    if ($this->request->isPost()) {
+    if ($this->controller->request->isPost()) {
       // Access POST data
       $userData = [
         'name'        => $this->controller->request->getPost("name"),
@@ -25,9 +26,17 @@ class UserCreateHandler extends UserHandlerAbstract
         'params'      => null,
         'create_time' => date('Y-m-d H:i:s.uO')
       ];
-      $user = new User();
-      $user->init($userData);
+      $userDao = new User();
+      $userDao->init($userData);
+
+      $usersModel = new Users();
+      if (($result = $usersModel->createUser($userDao)) == null) {
+        return false;
+      }
+      return $result;
+
     } else {
+      //echo 'login form';
       //todo:view here
     }
 

@@ -16,6 +16,7 @@ class UserCreateHandler extends UserHandlerAbstract
   public function handle()
   {
     if ($this->controller->request->isPost()) {
+      $this->controller->view->disable();
       // Access POST data
       $userData = [
         'name'        => $this->controller->request->getPost("name"),
@@ -26,14 +27,15 @@ class UserCreateHandler extends UserHandlerAbstract
         'params'      => null,
         'create_time' => date('Y-m-d H:i:s.uO')
       ];
-      $userDao = new User();
+      print_r($userData);
+      /*$userDao = new User();
       $userDao->init($userData);
 
       $usersModel = new Users();
       if (($result = $usersModel->createUser($userDao)) == null) {
         return false;
       }
-      return $result;
+      return $result;*/
 
     } else {
       //echo 'login form';

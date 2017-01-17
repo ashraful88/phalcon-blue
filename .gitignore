@@ -13,3 +13,4 @@ composer.lock
 .idea/
 var/logs/exceptions.log
 vendor/
+.gitconfig

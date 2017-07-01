@@ -33,4 +33,9 @@ class BlogController extends Controller
 
   }
 
+  public function createPost(){
+    $postsModel = new PostsModel();
+    $postsModel->createPost($this->request);
+  }
+
 }

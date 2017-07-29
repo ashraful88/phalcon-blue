@@ -25,7 +25,9 @@ class PostDAO extends Model
       $this->setPost($post);
     }
   }
-
+  /**
+  * set title of post
+  */
   public function setTitle($title){
     $this->title = $title;
   }

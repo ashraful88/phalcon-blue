@@ -12,6 +12,10 @@ use Blue\Modules\Blog\Models\PostDAO;
  */
 class Posts extends Model
 {
+  protected $dao;
+  public function __construct(){
+    $this->dao = new PostDAO();
+  }
   public function getPosts(){
 
   }
@@ -22,15 +26,11 @@ class Posts extends Model
 
   }
   public function createPost($request){
-    $dao = new PostDAO();
-    $dao->setTitle($request->getPost('title'));
-    $dao->setBody($request->getPost('body'));
-    
+    $this->dao->setTitle($request->getPost('title'));
+    $this->dao->setBody($request->getPost('body'));
   }
-  public function deletePost(){
-
+  public function deletePost($request){
+    $this->dao->setId($request->getPost('id'));
   }
-
-
 
 }

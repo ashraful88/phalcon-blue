@@ -10,4 +10,7 @@ YELLOW=\\033[1;33m
 install-db:
 	@sh db-install.sh
 
+dev-config-db:
+		@sh db-config.sh
+
 provision: init-db

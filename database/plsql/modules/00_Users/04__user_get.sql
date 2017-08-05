@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION user_get(i_user_id user_accouts.user_id%TYPE)
+CREATE OR REPLACE FUNCTION user_get(i_user_id user_accounts.user_id%TYPE)
   RETURNS SETOF user_accounts AS $$
 BEGIN
 

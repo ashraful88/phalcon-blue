@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION user_get_by_email(i_email user_accouts.email%TYPE)
+CREATE OR REPLACE FUNCTION user_get_by_email(i_email user_accounts.email%TYPE)
   RETURNS SETOF user_accounts AS $$
 BEGIN
 

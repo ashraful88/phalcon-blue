@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION post_get_by_user(i_user_id user_accouts.user_id%TYPE,
+CREATE OR REPLACE FUNCTION post_get_by_user(i_user_id user_accounts.user_id%TYPE,
                                             i_offset   INT)
   RETURNS SETOF blog_posts AS $$
 BEGIN

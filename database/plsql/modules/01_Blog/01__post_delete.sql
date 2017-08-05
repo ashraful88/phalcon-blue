@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION post_delete(i_post_id blog_posts.post_is%TYPE)
+CREATE OR REPLACE FUNCTION post_delete(i_post_id blog_posts.post_id%TYPE)
   RETURNS BOOLEAN AS $$
 BEGIN
 

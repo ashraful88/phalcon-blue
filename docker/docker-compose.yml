@@ -1,0 +1,42 @@
+{
+    "version": "2",
+    "volumes": {
+        "postgres_data": {}
+    },
+    "services": {
+        "postgres": {
+            "image": "postgres:alpine",
+            "volumes": [
+                "postgres_data:/var/lib/postgresql/data",
+                "./..:/var/www",
+            ],
+            "command": ['sh /var/www/db-install-docker.sh']
+
+        },
+        "php-fpm": {
+            "build": {
+                "context": ".",
+                "dockerfile": "Dockerfile-php7.1-fpm"
+            },
+            "volumes": [
+                "./../public:/var/www/html"
+            ],
+            "depends_on": [
+                "postgres"
+            ]
+        },
+        "nginx": {
+            "image": "nginx:alpine",
+            "volumes": [
+                "./..:/var/www",
+                "./nginx.php-fpm.conf:/etc/nginx/nginx.conf:ro"
+            ],
+            "ports": [
+                "80:80"
+            ],
+            "depends_on": [
+                "php-fpm"
+            ]
+        }
+    }
+}

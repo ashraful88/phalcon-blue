@@ -7,6 +7,7 @@
  */
 
 error_reporting(E_ALL);
+set_error_handler("handleError");
 
 $debug = new \Phalcon\Debug();
 $debug->listen();
@@ -51,3 +52,22 @@ try {
   echo $e->getMessage();
   echo $e->getTraceAsString();
 }
+
+function handleError($errorNo, $errorStr){
+  $response = new \Phalcon\Http\Response();
+  $response->setStatusCode(500, "Internal Server Error");
+  $response->setHeader("Content-Type", "application/json");
+  $json = [
+    "errors" => [
+      [
+        "status"    => 500,
+        "errorCode" => $errorNo,
+        "title"     => "Internal Server Error",
+        "detail"    => (($errorStr !== null) ? $errorStr : "Unexpected error in server")
+      ]
+    ]
+  ];
+  $response->setContent(json_encode($json));
+  $response->send();
+}
+

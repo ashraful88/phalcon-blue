@@ -14,6 +14,14 @@ $debug->listen();
 
 use Phalcon\Mvc\Application;
 
+$globalLogger = new \Phalcon\Logger\Adapter\Syslog(
+	"phalcon-blue",
+	array(
+		'option'   => LOG_NDELAY,
+		'facility' => LOG_LOCAL0
+	)
+);
+
 define('APP_PATH', realpath('..') . '/');
 
 try {
@@ -49,8 +57,8 @@ try {
   echo $application->handle()->getContent();
 
 } catch (\Exception $e) {
-  echo $e->getMessage();
-  echo $e->getTraceAsString();
+  $globalLogger->critical($e->getMessage());
+	$globalLogger->critical($e->getTraceAsString());
 }
 
 function handleError($errorNo, $errorStr){

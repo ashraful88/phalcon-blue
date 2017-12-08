@@ -31,6 +31,10 @@ $di->set('session', function () {
   return $session;
 });
 
+$di->setShared('logger', function () use ($globalLogger) {
+	return $globalLogger;
+});
+
 /**
  * Database connection is created based on parameters defined in the configuration file
  */

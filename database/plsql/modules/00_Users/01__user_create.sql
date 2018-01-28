@@ -13,7 +13,7 @@ BEGIN
   END IF;
 
   INSERT INTO user_accounts (user_id, name, email, phone, password, status, params)
-  VALUES (uuid_generate_v4(), i_name, i_email, i_phone, i_password, i_status, i_params)
+  VALUES (uuid_generate_v4(), i_name, i_email, i_phone, crypt(i_password, gen_salt('bf', 8)), i_status, i_params)
   RETURNING user_id
     INTO o_user_id;
 

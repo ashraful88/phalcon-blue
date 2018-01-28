@@ -8,3 +8,6 @@ CREATE TABLE user_accounts (
   status INT NOT NULL,
   create_time TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+GRANT SELECT, INSERT, DELETE, UPDATE ON user_accounts to bluewriterole;
+GRANT SELECT ON user_accounts to bluereadrole;

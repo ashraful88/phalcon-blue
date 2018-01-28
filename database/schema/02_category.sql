@@ -8,3 +8,6 @@ CREATE TABLE categories (
   status INT NOT NULL,
   create_time TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+GRANT SELECT, INSERT, DELETE, UPDATE ON categories to bluewriterole;
+GRANT SELECT ON categories to bluereadrole;

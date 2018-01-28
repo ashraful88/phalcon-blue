@@ -13,10 +13,24 @@ BEGIN
   THEN
     RAISE EXCEPTION '%', 'Blue:NULL_DATA:Blue';
   END IF;
-  -- TODO: edit post cats and tags
-  l_categories     := i_params :: JSON ->> 'categories';
-  l_tags           := i_params :: JSON ->> 'tags';
 
+  UPDATE blog_posts
+  SET
+    title   = i_title,
+    body    = i_body,
+    params = i_params,
+    status = i_status
+  WHERE
+    post_id = i_post_id;
+
+  -- TODO: need to update category and tags
+
+  IF FOUND
+  THEN
+    RETURN TRUE;
+  ELSE
+    RETURN FALSE;
+  END IF;
 
 END;
 $$ LANGUAGE plpgsql;

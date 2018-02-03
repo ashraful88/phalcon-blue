@@ -1,22 +1,42 @@
-<div>
-  <h3>Create your account with us</h3>
-</div>
-<div>
-  <form action="/accounts/create" method="post">
-    <div>
-      Name:<br/>
-      <input type="text" name="name"/>
-      <br/>
-      <br/>
-      Email:<br/>
-      <input type="text" name="email"/>
-      <br/>
-      <br/>
-      Password:<br/>
-      <input type="password" name="password"/>
-      <br/>
-      <br/>
-      <input type="submit" value="Create Account"/>
-    </div>
-  </form>
-</div>
+<div class="modal-content">
+                <header>
+                    <p>Create New Account</p>
+                </header>
+                <form action="/accounts/create" method="post">
+                  <div class="field-block">
+                     <div class="labeled-input">
+                         <label style="">Name *</label>
+                         <input title="Full Name" type="text" name="name" required="">
+                     </div>
+                  </div>
+                     <div class="field-block">
+                        <div class="labeled-input">
+                            <label style="">E-mail *</label>
+                            <input title="E-mail Address" type="email" name="email" required="">
+                        </div>
+                    </div>
+                    <div class="field-block">
+                        <div class="labeled-input">
+                            <label>Password *</label>
+                            <input title="Password" type="password" name="password" required="">
+                        </div>
+                    </div>
+                    <div class="field-block">
+                        <div class="labeled-input">
+                            <label>Confirm Password *</label>
+                            <input title="Re-type Password" type="password" name="re-password" required="">
+                        </div>
+                    </div>
+                    <div class="field-block">
+                        <div class="labeled-input">
+                            <label>Mobile No</label>
+                            <input title="Mobile No" name="phone" type="text">
+                        </div>
+                    </div>
+                    <button class="btn btn-md btn-green block-element" type="submit">Register Now</button>
+                    <div class="login-cta text-center"><br>
+                        By clicking Signup Now, you agree to <br>
+                        <a href="terms.html">our Terms</a> and <a href="privacy.html">Privacy Policy</a>.
+                    </div>
+                </form>
+            </div>

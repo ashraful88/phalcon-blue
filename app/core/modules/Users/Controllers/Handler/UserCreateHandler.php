@@ -22,25 +22,29 @@ class UserCreateHandler extends UserHandlerAbstract
         'name'        => $this->controller->request->getPost("name"),
         'email'       => $this->controller->request->getPost("email"),
         'password'    => $this->controller->request->getPost("password"),
+        'phone'       => $this->controller->request->getPost("phone"),
         'user_id'     => null,
         'status'      => 1,
         'params'      => null,
         'create_time' => date('Y-m-d H:i:s.uO')
       ];
-      print_r($userData);
-      /*$userDao = new User();
+      //print_r($userData);
+      if(!$userData['password'] && !$userData['email'] && !$userData['phone']){
+        echo 'validation failed';
+        return false;
+      }
+      $userDao = new User();
       $userDao->init($userData);
 
       $usersModel = new Users();
       if (($result = $usersModel->createUser($userDao)) == null) {
+        echo $usersModel->getError();
         return false;
       }
-      return $result;*/
+      return $result;
 
-    } else {
-      //echo 'login form';
-      //todo:view here
     }
+    return false;
 
   }
 

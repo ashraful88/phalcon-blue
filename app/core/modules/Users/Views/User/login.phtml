@@ -1,0 +1,65 @@
+<div id="signInModal" class="modal-container">
+
+    <div class="inner">
+
+        <div class="social_login_opt">
+            <div>
+                <div class="opt-navigator dropdown-wrap">
+                    <button>open options</button>
+                    <div class="basic-dropdown">
+                        <ul class="social-drop-list">
+                            <li><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i>Linkedin</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="social-opts">
+                    <a href="#" class="opt-fb-login active">
+                        <i class="fa fa-facebook"></i>
+                        <span>Login with facebook</span>
+                    </a>
+                    <a href="#" class="opt-gp-login active">
+                        <i class="fa fa-google"></i>
+                        <span>Login with Google</span>
+                    </a>
+
+                </div>
+            </div>
+            <span class="split-opt">or</span>
+        </div>
+        <div class="modal-content">
+
+            <form action="/accounts/login" method="post">
+                <div class="field-block">
+                    <div class="labeled-input">
+                        <label>Username</label>
+                        <input title="Email / Phone" type="text" name="username">
+                    </div>
+                </div>
+                <div class="field-block">
+                    <div class="labeled-input">
+                        <label>Password</label>
+                        <input title="Password" type="password" name="password">
+                    </div>
+                </div>
+                <div class="row login-actions field-block">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="custom-radio">
+                            <input type="radio" name="rememberme" id="login001">
+                            <label for="login001">Remember me</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 xs-text-left text-right">
+                        <a href="/accounts/forgot">Forgot Password?</a>
+                    </div>
+                </div>
+
+                <button class="btn btn-md btn-green block-element" type="submit">Login Now</button>
+                <div class="login-cta text-center">
+                    <p>Don't have an account?</p>
+                    <a class="modal-trigger" href="#signUpModal">Register here FREE</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

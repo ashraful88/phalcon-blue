@@ -3,15 +3,16 @@ namespace Blue\Modules\Users\Models\Dao;
 
 use Rhumsaa\Uuid\Console\Exception;
 
-class User
-{
-  protected $id = null;
+class User{
+
+  protected $userId = null;
   protected $name = null;
   protected $email = null;
+  protected $phone = null;
   protected $password = null;
   protected $params = null;
   protected $status = null;
-  protected $create_time = null;
+  protected $createTime = null;
 
   protected $error = null;
 
@@ -32,123 +33,122 @@ class User
     }
     $this->setId($data['user_id']);
     $this->setEmail($data['email']);
+    $this->setPhone($data['phone']);
     $this->setName($data['name']);
     $this->setPassword($data['password']);
     $this->setStatus($data['status']);
-    $this->setParam($data['param']);
+    $this->setParam($data['params']);
     $this->setCreateTime($data['create_time']);
   }
 
   /**
-   * @param $id
+   * @param $userId
    */
-  public function setId($id)
-  {
-    $this->id = $id;
+  public function setId($userId){
+    $this->userId = $userId;
   }
 
   /**
    * @return null
    */
-  public function getId()
-  {
-    return $this->id;
+  public function getId(){
+    return $this->userId;
   }
 
   /**
    * @param $name
    */
-  public function setName($name)
-  {
+  public function setName($name){
     $this->name = $name;
   }
 
   /**
    * @return null
    */
-  public function getName()
-  {
+  public function getName(){
     return $this->name;
   }
 
   /**
    * @param $email
    */
-  public function setEmail($email)
-  {
+  public function setEmail($email){
     $this->email = $email;
   }
 
   /**
    * @return null
    */
-  public function getEmail()
-  {
-    return $this->email;
+  public function getPhone(){
+    return $this->phone;
+  }
+  /**
+   * @param $email
+   */
+  public function setPhone($phone){
+    $this->phone = $phone;
   }
 
   /**
+   * @return null
+   */
+  public function getEmail(){
+    return $this->email;
+  }
+  /**
    * @param $password
    */
-  public function setPassword($password)
-  {
+  public function setPassword($password){
     $this->password = $password;
   }
 
   /**
    * @return null
    */
-  public function getPassword()
-  {
+  public function getPassword(){
     return $this->password;
   }
 
   /**
    * @param $status
    */
-  public function setStatus($status)
-  {
+  public function setStatus($status){
     $this->status = $status;
   }
 
   /**
    * @return null
    */
-  public function getStatus()
-  {
+  public function getStatus(){
     return $this->status;
   }
 
   /**
    * @param $params
    */
-  public function setParam($params)
-  {
+  public function setParam($params){
     $this->params = $params;
   }
 
   /**
    * @return null
    */
-  public function getParams()
-  {
+  public function getParams(){
     return $this->params;
   }
 
   /**
    * @param $create_time
    */
-  public function setCreateTime($create_time)
-  {
-    $this->create_time = $create_time;
+  public function setCreateTime($createTime){
+    $this->createTime = $createTime;
   }
 
   /**
    * @return null
    */
-  public function getCreateTime()
-  {
-    return $this->create_time;
+  public function getCreateTime(){
+    return $this->createTime;
   }
 
 

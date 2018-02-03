@@ -19,16 +19,14 @@ class Users extends Model
   /**
    * @return string
    */
-  public function getError()
-  {
+  public function getError(){
     return $this->error;
   }
 
   /**
    * @return mixed
    */
-  protected function getLogger()
-  {
+  protected function getLogger(){
     return $this->di->get("logger");
   }
 
@@ -36,11 +34,11 @@ class Users extends Model
    * @param User $user
    * @return mixed|null
    */
-  public function createUser(User $user)
-  {
+  public function createUser(User $user){
     $userData = [
       $user->getName(),
       $user->getEmail(),
+      $user->getPhone(),
       $user->getPassword(),
       $user->getStatus(),
       $user->getParams()
@@ -48,7 +46,7 @@ class Users extends Model
     /** @var Db\AdapterInterface $database */
     $database = $this->di->get("db");
     try {
-      $set = $database->query("SELECT user_create(?,?,?,?,?);", $userData);
+      $set = $database->query("SELECT o_user_id AS user_id FROM user_create(?,?,?,?,?,?);", $userData);
       $set->setFetchMode(Db::FETCH_ASSOC);
       $result = $set->fetch();
       return $result;
@@ -60,22 +58,25 @@ class Users extends Model
   }
 
   /**
-   * @param $email
+   * @param $username
    * @param $password
    * @return mixed|null
    */
-  public function login($email, $password)
+  public function login($username, $password)
   {
     /** @var Db\AdapterInterface $database */
     $database = $this->di->get("db");
     try {
-      $set = $database->query("SELECT user_login(?,?);", [$email, $password]);
+      $set = $database->query(
+        "SELECT o_user_id AS user_id, o_name AS name, o_phone AS phone, o_email AS email, o_status AS status FROM user_login(?,?);",
+        [$username, $password]
+      );
       $set->setFetchMode(Db::FETCH_ASSOC);
       $result = $set->fetch();
       return $result;
     } catch (\PDOException $e) {
       $this->error = $e->getMessage();
-      $this->getLogger()->error(sprintf("Login Failed: %s  %s, error: %s", $email, $password, $this->error));
+      $this->getLogger()->error(sprintf("Login Failed: %s  %s, error: %s", $username, $password, $this->error));
     }
     return null;
   }
@@ -89,7 +90,7 @@ class Users extends Model
     /** @var Db\AdapterInterface $database */
     $database = $this->di->get("db");
     try {
-      $set = $database->query("SELECT user_get(?);", [$userId]);
+      $set = $database->query("SELECT * FROM user_get(?);", [$userId]);
       $set->setFetchMode(Db::FETCH_ASSOC);
       $result = $set->fetch();
       return $result;
@@ -109,7 +110,7 @@ class Users extends Model
     /** @var Db\AdapterInterface $database */
     $database = $this->di->get("db");
     try {
-      $set = $database->query("SELECT user_get_by_email(?);", [$email]);
+      $set = $database->query("SELECT * FROM user_get_by_email(?);", [$email]);
       $set->setFetchMode(Db::FETCH_ASSOC);
       $result = $set->fetch();
       return $result;
@@ -136,7 +137,7 @@ class Users extends Model
     /** @var Db\AdapterInterface $database */
     $database = $this->di->get("db");
     try {
-      $set = $database->query("SELECT user_update(?,?,?,?,?);", $userData);
+      $set = $database->query("SELECT o_user_id AS user_id FROM user_update(?,?,?,?,?);", $userData);
       $set->setFetchMode(Db::FETCH_ASSOC);
       $result = $set->fetch();
       return $result;
@@ -156,7 +157,7 @@ class Users extends Model
     /** @var Db\AdapterInterface $database */
     $database = $this->di->get("db");
     try {
-      $set = $database->query("SELECT user_delete(?);", [$userId]);
+      $set = $database->query("SELECT * FROM user_delete(?);", [$userId]);
       $set->setFetchMode(Db::FETCH_ASSOC);
       $result = $set->fetch();
       return $result;

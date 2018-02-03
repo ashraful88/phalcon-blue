@@ -5,8 +5,7 @@ CREATE OR REPLACE FUNCTION user_update(
       i_phone    user_accounts.phone%TYPE,
       i_password user_accounts.password%TYPE,
       i_params   user_accounts.params%TYPE,
-      i_status   user_accounts.status%TYPE,
-  OUT o_user_id  user_accounts.user_id%TYPE) AS $$
+      i_status   user_accounts.status%TYPE) RETURNS BOOLEAN AS $$
 DECLARE
   l_user_id    user_accounts.user_id%TYPE;
   l_name       user_accounts.name%TYPE;

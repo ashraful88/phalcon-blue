@@ -9,7 +9,7 @@ class UserReadHandler extends UserHandlerAbstract{
 
   public function __construct(UserController $controller)
   {
-
+    parent::__construct($controller);
   }
 
   public function handle()

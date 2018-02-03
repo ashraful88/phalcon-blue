@@ -13,6 +13,7 @@ $debug = new \Phalcon\Debug();
 $debug->listen();
 
 use Phalcon\Mvc\Application;
+use Phalcon\Di\FactoryDefault;
 
 $globalLogger = new \Phalcon\Logger\Adapter\Syslog(
 	"phalcon-blue",
@@ -23,20 +24,25 @@ $globalLogger = new \Phalcon\Logger\Adapter\Syslog(
 );
 
 define('APP_PATH', realpath('..') . '/');
+define('BASE_DIR', dirname(__DIR__));
+define('APP_DIR', BASE_DIR . '/app');
 
 try {
+	/** Composer autoload */
+	require BASE_DIR . "/vendor/autoload.php";
 
-  define('BASE_DIR', dirname(__DIR__));
-  define('APP_DIR', BASE_DIR . '/app');
-  
-  $config = include APP_DIR . '/etc/config.php';
+	/** Load environment variables */
+  $dotenv = new Dotenv\Dotenv(realpath(BASE_DIR));
+  $dotenv->load();
+  /**
+   * The FactoryDefault Dependency Injector
+	 * registers services for full-stack framework
+   */
+  $di = new FactoryDefault();
+
+  include APP_DIR . '/etc/config.php';
   require APP_DIR . '/etc/loader.php';
   require APP_DIR . '/etc/services.php';
-
-  /**
-   * Composer autoload
-   */
-  require BASE_DIR . "/vendor/autoload.php";
 
   /**
    * Handle the request
@@ -59,9 +65,11 @@ try {
 } catch (\Exception $e) {
   $globalLogger->critical($e->getMessage());
 	$globalLogger->critical($e->getTraceAsString());
+	echo $e->getMessage();
+	echo $e->getTraceAsString();
 }
 
-function handleError($errorNo, $errorStr){
+function handleError($errorNo, $errorStr, $errfile, $errline){
   $response = new \Phalcon\Http\Response();
   $response->setStatusCode(500, "Internal Server Error");
   $response->setHeader("Content-Type", "application/json");
@@ -71,11 +79,10 @@ function handleError($errorNo, $errorStr){
         "status"    => 500,
         "errorCode" => $errorNo,
         "title"     => "Internal Server Error",
-        "detail"    => (($errorStr !== null) ? $errorStr : "Unexpected error in server")
+        "detail"    => (($errorStr !== null) ? $errorStr." file: ".$errfile." line: ".$errline : "Unexpected error in server")
       ]
     ]
   ];
   $response->setContent(json_encode($json));
   $response->send();
 }
-

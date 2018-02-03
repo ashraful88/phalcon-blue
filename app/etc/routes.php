@@ -13,7 +13,7 @@ $di->set('router', function () {
     'action'     => 'index'
   ));
 
-// Create a group with a common module and controller
+  // Create a group with a common module and controller
   $users = new RouterGroup(
     array(
       'module'     => 'users',
@@ -43,16 +43,23 @@ $di->set('router', function () {
     )
   );
   $users->add(
+    "/profile",
+    array(
+      "controller" => "user",
+      "action"     => "profile"
+    )
+  );
+  $users->add(
     "/users/change-password",
     array(
       "controller" => "user",
       "action"     => "changePassword"
     )
   );
-// Add the group to the router
+  // Add the group to the router
   $router->mount($users);
 
-// Create a group with a common module and controller
+  // Create a group with a common module and controller
   $blog = new RouterGroup(
     array(
       'module'     => 'blog',
@@ -60,26 +67,26 @@ $di->set('router', function () {
     )
   );
 
-// All the routes start with /blog
+  // All the routes start with /blog
   $blog->setPrefix('/blog');
   $blog->add('/save', array(
-      'action' => 'save'
-    )
-  );
-  $blog->add('/edit/{id}', array(
-      'action' => 'edit',
-      'd'      => 1
-    )
-  );
-  $blog->add('/blog', array(
-      'controller' => 'blog',
-      'action'     => 'index'
-    )
-  );
+    'action' => 'save'
+  )
+);
+$blog->add('/edit/{id}', array(
+  'action' => 'edit',
+  'd'      => 1
+)
+);
+$blog->add('/blog', array(
+  'controller' => 'blog',
+  'action'     => 'index'
+)
+);
 // Add the group to the router
-  $router->mount($blog);
+$router->mount($blog);
 
-  return $router;
-  //$router->handle();
+return $router;
+//$router->handle();
 
 });
